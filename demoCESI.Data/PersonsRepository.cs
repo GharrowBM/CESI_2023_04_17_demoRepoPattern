@@ -1,4 +1,5 @@
 ﻿using demoCESI.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,12 @@ namespace demoCESI.Data
 
         public IEnumerable<Person> GetAll()
         {
-            return _context.Persons.ToArray();
+            return _context.Persons.Include(x => x.Address).ToArray();
         }
 
         public Person? GetById(int id)
         {
-            return _context.Persons.SingleOrDefault(x => x.Id == id);
+            return _context.Persons.Include(x => x.Address).SingleOrDefault(x => x.Id == id);
         }
 
         public Person? Insert(Person entity)
@@ -61,6 +62,7 @@ namespace demoCESI.Data
                 foundPerson.LastName = entity.LastName;
                 foundPerson.Email = entity.Email;
                 foundPerson.Phone = entity.Phone;
+                foundPerson.AddressId = entity.AddressId;
 
                 if (_context.SaveChanges() > 0)
                 {

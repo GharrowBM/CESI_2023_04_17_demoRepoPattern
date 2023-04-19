@@ -22,5 +22,7 @@ namespace demoCESI.WebApp.Models
         [StringLength(30)]
         [Required]
         public string Phone { get; set; } = string.Empty;
+
+        public int? AddressId { get; set; }
     }
 }

@@ -24,5 +24,8 @@ namespace demoCESI.Models
         
         [StringLength(30)]
         public string Phone { get; set; } = string.Empty;
+
+        public int? AddressId { get; set; }
+        public virtual Address? Address { get; set; }
     }
 }
